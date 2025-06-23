@@ -34,12 +34,6 @@ if __name__ == "__main__":
     add_rule("new_order", "order_total < 1000")
     add_rule("new_order", "user_country in ('US', 'CA', 'GB')")
     add_rule("new_order", "item_count > 0")
-    # Add a rule that will fail validation
-    # add_rule(
-    #     "new_order", "user_age > 18 and credit_score > 700"
-    # )  # 'credit_score' is not an allowed attribute
-
-    # 2. Simulate an application event
     print("\n--- Simulating a 'new_order' event ---")
 
     # In a real app, this data would come from the order being processed
