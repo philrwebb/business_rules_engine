@@ -8,8 +8,8 @@ This project implements a dynamic, database-driven business rules engine in Pyth
 
 This is the main application file and serves as the entry point and orchestrator. Its primary responsibilities are:
 
-- **Initialization**: Sets up the database by calling `db_funcs.init_db()`.
-- **Data Seeding**: Populates the database with initial allowed attributes and business rules for demonstration purposes.
+- **Initialization**: Sets up the database by calling `db_funcs.init_db()` and passing in the initial list of allowed attributes.
+- **Data Seeding**: Populates the database with business rules for demonstration purposes.
 - **Event Simulation**: Simulates a runtime event (e.g., a new order) with a specific data context.
 - **Rule Execution**: Fetches the relevant rules and allowed attributes from the database, then uses `business_rules.execute_business_rule()` to evaluate each rule against the event's context.
 - **Reporting**: Prints the validation and execution results to the console.
@@ -30,9 +30,10 @@ This module contains the core logic for parsing, validating, and executing the b
 
 This module encapsulates all database interactions, using Python's built-in `sqlite3` library. It provides a clean API for the rest of the application to manage the persistence of rules and attributes.
 
-- **`init_db()`**: Creates the SQLite database file and the necessary tables (`allowed_attributes`, `business_rules`) if they don't already exist.
+- **`init_db(allowed_attributes=None)`**: Creates the SQLite database file and the necessary tables. If a list of attribute names is provided, it populates the `allowed_attributes` table.
 - **`add_attribute()` / `get_allowed_attributes()`**: Functions to manage the list of attributes that are permissible for use in business rules.
-- **`add_rule()` / `get_rules_for_event()`**: Functions to add new business rules to the database and retrieve all rules associated with a specific event type (e.g., 'new_order').
+- **`add_rule()` / `get_rules_for_event()`**: Functions to add new business rules to the database and retrieve all rules associated with a specific event type.
+- **`clear_rules(event_type=None)`**: Deletes rules from the database. If an `event_type` is provided, it deletes only the rules for that event. If omitted, it deletes all rules.
 
 ### `test_business_rules.py`
 
@@ -42,3 +43,7 @@ This file contains unit tests for the `business_rules.py` module. It uses Python
 - Usage of allowed and disallowed attributes and functions.
 - Correct execution and boolean outcomes of rules.
 - Handling of runtime errors during rule evaluation.
+
+### `test_db_funcs.py`
+
+This file contains unit tests for the `db_funcs.py` module. It uses an in-memory SQLite database to test the database functions in isolation, ensuring that creating, reading, and deleting attributes and rules works as expected without affecting the main development database.
