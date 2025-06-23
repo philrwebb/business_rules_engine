@@ -47,3 +47,55 @@ This file contains unit tests for the `business_rules.py` module. It uses Python
 ### `test_db_funcs.py`
 
 This file contains unit tests for the `db_funcs.py` module. It uses an in-memory SQLite database to test the database functions in isolation, ensuring that creating, reading, and deleting attributes and rules works as expected without affecting the main development database.
+
+## Getting Started
+
+To get this project up and running on your local machine, follow these steps:
+
+1.  **Clone the Repository**
+
+    ```bash
+    git clone <your-repository-url>
+    cd <repository-directory>
+    ```
+
+2.  **Create and Activate a Python Virtual Environment**
+
+    It is highly recommended to use a virtual environment to manage project dependencies.
+
+    ```bash
+    # Create the virtual environment
+    python3 -m venv venv
+
+    # Activate the environment (on macOS/Linux)
+    source venv/bin/activate
+
+    # On Windows, use:
+    # .\venv\Scripts\activate
+    ```
+
+3.  **Install Dependencies**
+
+    This project currently has no external dependencies, as it only uses Python's standard library. However, if any were added, you would install them using the `requirements.txt` file:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Run the Application**
+
+    Execute the main `rules.py` script to see the business rules engine in action. It will create the `business_rules.db` file, populate it with sample data, and run a simulation.
+
+    ```bash
+    python3 rules.py
+    ```
+
+5.  **Run the Tests**
+
+    To verify that all components are working correctly, you can run the unit tests:
+
+    ```bash
+    python3 -m unittest discover
+    # For more verbose output:
+    python3 -m unittest discover -v
+    ```

@@ -67,7 +67,7 @@ def add_rule(event_type: str, rule_text: str):
     with get_db_connection() as conn:
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO business_rules (event_type, rule_string) VALUES (?, ?)",
+            "INSERT INTO business_rules (event_type, rule_text) VALUES (?, ?)",
             (event_type, rule_text),
         )
         conn.commit()
@@ -79,7 +79,7 @@ def get_rules_for_event(event_type: str) -> list[str]:
     with get_db_connection() as conn:
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT rule_string FROM business_rules WHERE event_type = ?", (event_type,)
+            "SELECT rule_text FROM business_rules WHERE event_type = ?", (event_type,)
         )
         return [row[0] for row in cursor.fetchall()]
 
