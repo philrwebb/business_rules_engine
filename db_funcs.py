@@ -74,3 +74,23 @@ def get_rules_for_event(event_type: str) -> list[str]:
             "SELECT rule_string FROM business_rules WHERE event_type = ?", (event_type,)
         )
         return [row[0] for row in cursor.fetchall()]
+
+
+def clear_rules(event_type: str | None = None):
+    """
+    Clears rules from the database.
+
+    If event_type is provided, only rules for that event are deleted.
+    If event_type is None, all rules are deleted.
+    """
+    with get_db_connection() as conn:
+        cursor = conn.cursor()
+        if event_type:
+            print(f"Clearing rules for event type: {event_type}")
+            cursor.execute(
+                "DELETE FROM business_rules WHERE event_type = ?", (event_type,)
+            )
+        else:
+            print("Clearing all rules.")
+            cursor.execute("DELETE FROM business_rules")
+        conn.commit()

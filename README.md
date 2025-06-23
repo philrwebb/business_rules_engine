@@ -33,3 +33,12 @@ This module encapsulates all database interactions, using Python's built-in `sql
 - **`init_db()`**: Creates the SQLite database file and the necessary tables (`allowed_attributes`, `business_rules`) if they don't already exist.
 - **`add_attribute()` / `get_allowed_attributes()`**: Functions to manage the list of attributes that are permissible for use in business rules.
 - **`add_rule()` / `get_rules_for_event()`**: Functions to add new business rules to the database and retrieve all rules associated with a specific event type (e.g., 'new_order').
+
+### `test_business_rules.py`
+
+This file contains unit tests for the `business_rules.py` module. It uses Python's built-in `unittest` framework to verify the correctness of the rule validation and execution logic. The tests cover:
+
+- Valid and invalid rule syntax.
+- Usage of allowed and disallowed attributes and functions.
+- Correct execution and boolean outcomes of rules.
+- Handling of runtime errors during rule evaluation.

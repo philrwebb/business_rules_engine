@@ -12,6 +12,7 @@ from db_funcs import (
     get_allowed_attributes,
     add_rule,
     get_rules_for_event,
+    clear_rules,
 )
 
 # --- Example Runtime Usage with Database ---
@@ -27,9 +28,7 @@ if __name__ == "__main__":
     # Add some business rules for different events
     print("Populating business rules...")
     # Clear existing rules for this event to make the example idempotent
-    with sqlite3.connect(DB_NAME) as conn:
-        conn.execute("DELETE FROM business_rules WHERE event_type = 'new_order'")
-        conn.commit()
+    clear_rules("new_order")
 
     add_rule("new_order", "user_age > 18")
     add_rule("new_order", "order_total < 1000")
