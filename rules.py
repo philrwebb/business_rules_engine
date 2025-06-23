@@ -8,7 +8,6 @@ from business_rules import (
 from db_funcs import (
     DB_NAME,
     init_db,
-    add_attribute,
     get_allowed_attributes,
     add_rule,
     get_rules_for_event,
@@ -18,12 +17,7 @@ from db_funcs import (
 # --- Example Runtime Usage with Database ---
 if __name__ == "__main__":
     # 1. Initialize and populate the database
-    init_db()
-
-    # Add attributes that users are allowed to build rules with
-    print("\nPopulating allowed attributes...")
-    for attr in ["user_age", "order_total", "user_country", "item_count"]:
-        add_attribute(attr)
+    init_db(["user_age", "order_total", "user_country", "item_count"])
 
     # Add some business rules for different events
     print("Populating business rules...")

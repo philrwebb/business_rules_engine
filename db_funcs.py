@@ -8,8 +8,11 @@ def get_db_connection():
     return sqlite3.connect(DB_NAME)
 
 
-def init_db():
-    """Initializes the database with the necessary tables."""
+def init_db(allowed_attributes: list[str] | None = None):
+    """
+    Initializes the database with the necessary tables and optionally
+    populates the allowed attributes.
+    """
     with get_db_connection() as conn:
         cursor = conn.cursor()
         # Table for allowed system attributes
@@ -32,6 +35,11 @@ def init_db():
         """
         )
         conn.commit()
+
+    if allowed_attributes:
+        print("\nPopulating allowed attributes...")
+        for attr in allowed_attributes:
+            add_attribute(attr)
 
 
 def add_attribute(name: str):
