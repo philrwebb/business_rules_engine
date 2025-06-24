@@ -88,9 +88,11 @@ cython_debug/
 .vscode/
 
 # Custom
-business_rules.db
+*business_rules.db
 businessrules.session.sql
 compile.py
 countfor.py
 linter.py
+
+
 

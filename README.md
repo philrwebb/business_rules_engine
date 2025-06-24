@@ -1,3 +1,7 @@
+# Business Rules Engine (Python and C#)
+
+This project implements a dynamic, database-driven business rules engine. It allows for the safe execution of user-defined rules against a given data context. The project includes two equivalent implementations: one in Python and one in C#.
+
 # Python Business Rules Engine
 
 This project implements a dynamic, database-driven business rules engine in Python. It allows for the safe execution of user-defined rules against a given data context.
@@ -98,4 +102,64 @@ To get this project up and running on your local machine, follow these steps:
     python3 -m unittest discover
     # For more verbose output:
     python3 -m unittest discover -v
+    ```
+
+# C# Business Rules Engine
+
+This is a C# implementation of the same business rules engine, located in the `Csharp/` subdirectory. It uses .NET, the Dapper micro-ORM for database access, and the `System.Linq.Dynamic.Core` library for safe, dynamic rule evaluation.
+
+## Core Components (C#)
+
+The C# solution (`CSharpBusinessRules.sln`) is organized into three projects:
+
+-   **`BusinessRulesEngine`**: A class library containing the core logic.
+    -   **`BusinessRule.cs`**: A simple record defining the data structure for a rule.
+    -   **`IDatabaseService.cs`**: An interface defining the contract for database operations.
+    -   **`DatabaseService.cs`**: The implementation of `IDatabaseService` using Dapper and `Microsoft.Data.Sqlite` to interact with the `business_rules.db` SQLite database.
+    -   **`RuleEvaluator.cs`**: Contains the `Evaluate` method, which safely parses and evaluates rule strings against a given data object using the `System.Linq.Dynamic.Core` library. This prevents arbitrary code execution.
+-   **`App`**: A console application that serves as the entry point and orchestrator. It demonstrates how to initialize the database, add rules, and evaluate them against a sample `Order` object.
+-   **`Tests`**: An xUnit test project containing unit tests for the `DatabaseService` and `RuleEvaluator`. It uses an in-memory SQLite database to ensure test isolation.
+
+## Getting Started (C#)
+
+To get the C# project up and running, you will need the [.NET SDK](https://dotnet.microsoft.com/download) installed.
+
+1.  **Navigate to the C# Directory**
+
+    All commands should be run from within the `Csharp` subdirectory.
+
+    ```bash
+    cd Csharp
+    ```
+
+2.  **Restore Dependencies**
+
+    This command restores the NuGet packages defined in the project files (e.g., Dapper, xUnit, etc.).
+
+    ```bash
+    dotnet restore
+    ```
+
+3.  **Build the Solution**
+
+    Compile all the projects in the solution.
+
+    ```bash
+    dotnet build
+    ```
+
+4.  **Run the Application**
+
+    Execute the main console application. It will create/update the `business_rules.db` file in the `Csharp/` directory, populate it with sample data, and run the simulation.
+
+    ```bash
+    dotnet run --project App
+    ```
+
+5.  **Run the Tests**
+
+    To verify that all components are working correctly, run the unit tests.
+
+    ```bash
+    dotnet test
     ```
