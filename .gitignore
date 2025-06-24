@@ -94,5 +94,15 @@ compile.py
 countfor.py
 linter.py
 
+# C# / .NET Build Artifacts
+Csharp/App/bin/
+Csharp/App/obj/
+Csharp/BusinessRulesEngine/bin/
+Csharp/BusinessRulesEngine/obj/
+Csharp/Tests/bin/
+Csharp/Tests/obj/
+
+
+
 
 
